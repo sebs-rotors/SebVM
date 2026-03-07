@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		022B5DD22F5C28CB00F79CA0 /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022B5DD12F5C28CB00F79CA0 /* Virtualization.framework */; };
+		022B5DD52F5C431700F79CA0 /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022B5DD12F5C28CB00F79CA0 /* Virtualization.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				022B5DD22F5C28CB00F79CA0 /* Virtualization.framework in Frameworks */,
+				022B5DD52F5C431700F79CA0 /* Virtualization.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +263,7 @@
 		022B5DC72F5B778300F79CA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FedoraVM/FedoraVM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55QHSUT57T;
 				PRODUCT_BUNDLE_IDENTIFIER = FedoraVM;
@@ -276,6 +277,7 @@
 		022B5DC82F5B778300F79CA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FedoraVM/FedoraVM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 55QHSUT57T;
 				PRODUCT_BUNDLE_IDENTIFIER = FedoraVM;

@@ -8,6 +8,8 @@
 import Foundation
 import Virtualization
 
-let vmConfig = buildConfig()
+let vmConfig = try! buildConfig()
+try vmConfig.validate()
 let virtualMachine = VZVirtualMachine(configuration: vmConfig)
 let vmView = buildView(virtualMachine: virtualMachine)
+
