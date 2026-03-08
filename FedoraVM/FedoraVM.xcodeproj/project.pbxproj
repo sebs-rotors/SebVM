@@ -7,40 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		022B5DD52F5C431700F79CA0 /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022B5DD12F5C28CB00F79CA0 /* Virtualization.framework */; };
+		026D72672F5CF85000CE478F /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022B5DD12F5C28CB00F79CA0 /* Virtualization.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		022B5DBD2F5B778300F79CA0 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		022B5DBF2F5B778300F79CA0 /* FedoraVM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FedoraVM; sourceTree = BUILT_PRODUCTS_DIR; };
 		022B5DD12F5C28CB00F79CA0 /* Virtualization.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Virtualization.framework; path = System/Library/Frameworks/Virtualization.framework; sourceTree = SDKROOT; };
+		026D72422F5CF43D00CE478F /* SebVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SebVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		022B5DC12F5B778300F79CA0 /* FedoraVM */ = {
+		026D72432F5CF43D00CE478F /* SebVM */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = FedoraVM;
+			path = SebVM;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		022B5DBC2F5B778300F79CA0 /* Frameworks */ = {
+		026D723F2F5CF43D00CE478F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				022B5DD52F5C431700F79CA0 /* Virtualization.framework in Frameworks */,
+				026D72672F5CF85000CE478F /* Virtualization.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,7 +38,7 @@
 		022B5DB62F5B778300F79CA0 = {
 			isa = PBXGroup;
 			children = (
-				022B5DC12F5B778300F79CA0 /* FedoraVM */,
+				026D72432F5CF43D00CE478F /* SebVM */,
 				022B5DD02F5C28CA00F79CA0 /* Frameworks */,
 				022B5DC02F5B778300F79CA0 /* Products */,
 			);
@@ -59,7 +47,7 @@
 		022B5DC02F5B778300F79CA0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				022B5DBF2F5B778300F79CA0 /* FedoraVM */,
+				026D72422F5CF43D00CE478F /* SebVM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,27 +63,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		022B5DBE2F5B778300F79CA0 /* FedoraVM */ = {
+		026D72412F5CF43D00CE478F /* SebVM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 022B5DC62F5B778300F79CA0 /* Build configuration list for PBXNativeTarget "FedoraVM" */;
+			buildConfigurationList = 026D724F2F5CF43F00CE478F /* Build configuration list for PBXNativeTarget "SebVM" */;
 			buildPhases = (
-				022B5DBB2F5B778300F79CA0 /* Sources */,
-				022B5DBC2F5B778300F79CA0 /* Frameworks */,
-				022B5DBD2F5B778300F79CA0 /* CopyFiles */,
+				026D723E2F5CF43D00CE478F /* Sources */,
+				026D723F2F5CF43D00CE478F /* Frameworks */,
+				026D72402F5CF43D00CE478F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				022B5DC12F5B778300F79CA0 /* FedoraVM */,
+				026D72432F5CF43D00CE478F /* SebVM */,
 			);
-			name = FedoraVM;
+			name = SebVM;
 			packageProductDependencies = (
 			);
-			productName = FedoraVM;
-			productReference = 022B5DBF2F5B778300F79CA0 /* FedoraVM */;
-			productType = "com.apple.product-type.tool";
+			productName = SebVM;
+			productReference = 026D72422F5CF43D00CE478F /* SebVM.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -107,8 +95,9 @@
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					022B5DBE2F5B778300F79CA0 = {
+					026D72412F5CF43D00CE478F = {
 						CreatedOnToolsVersion = 26.3;
+						LastSwiftMigration = 2630;
 					};
 				};
 			};
@@ -126,13 +115,23 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				022B5DBE2F5B778300F79CA0 /* FedoraVM */,
+				026D72412F5CF43D00CE478F /* SebVM */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		026D72402F5CF43D00CE478F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		022B5DBB2F5B778300F79CA0 /* Sources */ = {
+		026D723E2F5CF43D00CE478F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -260,29 +259,68 @@
 			};
 			name = Release;
 		};
-		022B5DC72F5B778300F79CA0 /* Debug */ = {
+		026D724D2F5CF43F00CE478F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = FedoraVM/FedoraVM.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SebVM/SebVM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55QHSUT57T;
-				PRODUCT_BUNDLE_IDENTIFIER = FedoraVM;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sebs-rotors.SebVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		022B5DC82F5B778300F79CA0 /* Release */ = {
+		026D724E2F5CF43F00CE478F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = FedoraVM/FedoraVM.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SebVM/SebVM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55QHSUT57T;
-				PRODUCT_BUNDLE_IDENTIFIER = FedoraVM;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sebs-rotors.SebVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -300,11 +338,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		022B5DC62F5B778300F79CA0 /* Build configuration list for PBXNativeTarget "FedoraVM" */ = {
+		026D724F2F5CF43F00CE478F /* Build configuration list for PBXNativeTarget "SebVM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				022B5DC72F5B778300F79CA0 /* Debug */,
-				022B5DC82F5B778300F79CA0 /* Release */,
+				026D724D2F5CF43F00CE478F /* Debug */,
+				026D724E2F5CF43F00CE478F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
