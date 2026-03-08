@@ -6,19 +6,16 @@
 //
 
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
+#include "setupWindow.h"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     
-    QWidget window;
-    window.setWindowTitle("SebVM");
-    window.resize(400, 300);
-    
-    QLabel label("Qt is working!", &window);
-    label.move(150, 150);
-    
+    SetupWindow window;
+    window.onLaunch = [](const std::string& path, int cpuCount, int memoryGB) {
+        // TODO: save config and start VM
+    };
     window.show();
+    
     return app.exec();
 }
