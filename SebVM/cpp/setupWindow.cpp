@@ -57,7 +57,7 @@ SetupWindow::SetupWindow(QWidget* parent) : QWidget(parent) {
     mainLayout->addWidget(launchButton);
     
     // Completely ignoring MOC so I dont suffer that badly (for now)
-    connect(browseButton, &QPushButton::clicked, [this]() {
+    connect(browseButton, &QPushButton::clicked, this ,[this]() {
         QString path = QFileDialog::getOpenFileName(
             this,
             "Select Fedora Disk Image",
@@ -69,7 +69,7 @@ SetupWindow::SetupWindow(QWidget* parent) : QWidget(parent) {
         if (!path.isEmpty()) imagePathEdit->setText(path);
     });
     
-    connect(launchButton, &QPushButton::clicked, [this]() {
+    connect(launchButton, &QPushButton::clicked, this, [this]() {
         if (!validateInputs()) return;
         if (onLaunch) {
             onLaunch(
