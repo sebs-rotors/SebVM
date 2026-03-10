@@ -8,12 +8,14 @@
 #include <QtWidgets/QApplication>
 #include "setupWindow.hpp"
 #include "vmconfig.hpp"
+#include "vmbridge_api.h"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     
     if (configExists()) {
         VMConfig config = loadConfig();
+        startVM(config.diskPath.c_str(), config.cpuCount, config.memoryGB);
     } else {
         SetupWindow* window = new SetupWindow();
         window->onLaunch = [window](const std::string& path, int cpuCount, int memoryGB) {
@@ -23,7 +25,7 @@ int main(int argc, char* argv[]) {
             config.memoryGB = memoryGB;
             saveConfig(config);
             window->close();
-            // TODO: start VM via bridging
+            startVM(config.diskPath.c_str(), config.cpuCount, config.memoryGB);
         };
         window->show();
     }
