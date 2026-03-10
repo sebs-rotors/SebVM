@@ -16,10 +16,11 @@ func buildConfig(diskPath: String, cpuCount: Int, memoryGB: Int) throws -> VZVir
 
     // EFI Bootloader
     let bootloader = VZEFIBootLoader()
-    // TODO: update efiStoreURL dynamically
-    let efiStoreURL = URL(
-        fileURLWithPath:
-            "/Users/sebisidor/Code/Personal/Tasks/SebVM/resources/efi-variable-store")
+    let appSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+    let SebVMDirURL = appSupportURL.appendingPathComponent("SebVM")
+    try FileManager.default.createDirectory(at: SebVMDirURL, withIntermediateDirectories: true)
+    let efiStoreURL = SebVMDirURL.appendingPathComponent("efi-variable-store")
+    
     if FileManager.default.fileExists(atPath: efiStoreURL.path) {
         bootloader.variableStore = VZEFIVariableStore(url: efiStoreURL)
     } else {
