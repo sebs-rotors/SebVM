@@ -17,7 +17,7 @@ using json = nlohmann::json;
 static std::string configFilePath() {
     QString dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir().mkpath(dir);
-    return (dir + "config.json").toStdString();
+    return (dir + "/config.json").toStdString();
 }
 
 bool configExists() {

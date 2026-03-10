@@ -8,10 +8,8 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QSpinBox>
-#include <QtWidgets/QPushButton>
 #include <functional>
+#include "vmConfigForm.hpp"
 
 class SetupWindow : public QWidget {
 public:
@@ -19,9 +17,6 @@ public:
     std::function<void(const std::string&, int, int)> onLaunch;
     
 private:
-    QLineEdit* imagePathEdit;
-    QSpinBox* cpuCountSpinBox;
-    QSpinBox* memorySpinBox;
-    
+    VMConfigForm* form;
     bool validateInputs();
 };

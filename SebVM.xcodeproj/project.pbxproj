@@ -19,7 +19,7 @@
 		02BDA8BD2F5FBD750019DCC0 /* Exceptions for "SebVM" folder in "SebVM" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				arc/AppDelegatedeprecated.swift,
+				arc/AppDelegate.swift,
 				arc/maindeprecated.swift,
 				arc/VMBridge.mm,
 			);
