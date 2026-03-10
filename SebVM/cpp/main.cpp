@@ -9,6 +9,8 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QSystemTrayIcon>
 #include <QtWidgets/QStyle>
+#include <QtWidgets/QMessageBox>
+#include <QtCore/QFileInfo>
 #include "setupWindow.hpp"
 #include "settingsWindow.hpp"
 #include "vmconfig.hpp"
@@ -41,6 +43,20 @@ static void setupTrayIcon() {
     tray->show();
 }
 
+static void showSetupWindow() {
+    SetupWindow* window = new SetupWindow();
+    window->onLaunch = [window](const std::string& path, int cpuCount, int memoryGB) {
+        VMConfig config;
+        config.diskPath = path;
+        config.cpuCount = cpuCount;
+        config.memoryGB = memoryGB;
+        saveConfig(config);
+        window->close();
+        startVM(config.diskPath.c_str(), config.cpuCount, config.memoryGB);
+        setupTrayIcon();
+    };
+    window->show();
+}
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
@@ -50,21 +66,13 @@ int main(int argc, char* argv[]) {
     
     if (configExists()) {
         VMConfig config = loadConfig();
-        startVM(config.diskPath.c_str(), config.cpuCount, config.memoryGB);
-        setupTrayIcon();
-    } else {
-        SetupWindow* window = new SetupWindow();
-        window->onLaunch = [window](const std::string& path, int cpuCount, int memoryGB) {
-            VMConfig config;
-            config.diskPath = path;
-            config.cpuCount = cpuCount;
-            config.memoryGB = memoryGB;
-            saveConfig(config);
-            window->close();
+        if (QFileInfo::exists(QString::fromStdString(config.diskPath))) {
             startVM(config.diskPath.c_str(), config.cpuCount, config.memoryGB);
             setupTrayIcon();
-        };
-        window->show();
+        } else {
+            QMessageBox::warning(nullptr, "Disk image not found", QString("The configured disk image could not be found:\n\n%1\n\nPlease select a new image.").arg(QString::fromStdString(config.diskPath)));
+            showSetupWindow();
+        }
     }
     
     return app.exec();
