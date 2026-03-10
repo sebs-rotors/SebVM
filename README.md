@@ -6,33 +6,36 @@ A macOS virtual machine application for running aarch64 Linux on Apple Silicon, 
 
 ## Overview
 
-SebVM boots any aarch64 Linux distribution from a raw disk image using Apple's native Virtualization framework. The application is designed around a strict separation of concerns: the GUI and application logic are written in C++ using Qt, while the VM configuration and lifecycle are handled in Swift via Apple's Virtualization APIs. An Objective-C++ bridge layer connects the two.
+SebVM boots any aarch64 Linux distribution from a raw disk image using Apple's native Virtualization framework. The application is designed around a strict separation of concerns: the GUI and application logic are written in C++ using Qt, while the VM configuration and lifecycle are handled in Swift via Apple's Virtualization APIs. The two layers are connected via a direct C symbol bridge using Swift's `@_cdecl` export mechanism.
 
 ---
 
 ## Architecture
 
 ```
-Qt C++ (GUI + Logic) ↔ Objective-C++ Bridge (VMBridge.mm) ↔ Swift (Virtualization Framework)
+Qt C++ (GUI + Logic) ↔ C Bridge (vmbridge_api.h) ↔ Swift (Virtualization Framework)
 ```
 
 ### Layer Breakdown
 
 **Swift — Virtualization Layer** (`SebVM/swift/`)
 - Builds the `VZVirtualMachineConfiguration` with all required devices
-- Manages `VZVirtualMachine` lifecycle (start, stop)
+- Manages `VZVirtualMachine` lifecycle (start, graceful stop, forced stop)
 - Exposes `VZVirtualMachineView` for display rendering
 - Handles EFI variable store creation and persistence
+- Exports C-callable symbols via `@_cdecl` (`startVM`, `stopVM`, `setVMStoppedCallback`)
+- Uses `VZVirtualMachineDelegate` to notify the C++ layer when the VM stops
 
-**Objective-C++ Bridge** (`SebVM/bridge/VMBridge.mm`)
-- Translates between C++ types and Swift/Objective-C types
-- Exposes a C-compatible API surface for the Qt layer to call into Swift
-- Manages the boundary between the two runtimes
+**C Bridge** (`SebVM/bridge/vmbridge_api.h`)
+- Header-only C interface declaring the symbols exported from Swift
+- `extern "C"` guarded for C++ inclusion
+- No implementation — Swift exports directly as C symbols
 
 **C++/Qt — Application Layer** (`SebVM/cpp/`)
-- `main.cpp` — `QApplication` entry point; config-aware launch flow
+- `main.cpp` — `QApplication` entry point; config-aware launch flow with disk image validation
 - `setupWindow` — First-run Qt window for image path, CPU, and memory configuration
 - `settingsWindow` — Post-launch settings panel for updating VM configuration
+- `vmConfigForm` — Shared form widget (disk path, CPU, memory) embedded in both windows
 - `vmconfig` — Config struct, JSON serialization/deserialization via nlohmann/json
 
 ---
@@ -59,15 +62,25 @@ Launch
   │
   ├─ config.json exists?
   │     │
-  │     ├─ Yes → Load config → Start VM
+  │     ├─ Yes → Disk image still present?
+  │     │             │
+  │     │             ├─ Yes → Load config → Start VM → Show tray icon
+  │     │             │
+  │     │             └─ No  → Warn user → Show SetupWindow
   │     │
   │     └─ No  → Show SetupWindow
   │                   │
   │                   └─ User inputs image path, CPU, memory
   │                         │
-  │                         └─ Validate → Save config → Start VM
+  │                         └─ Validate → Save config → Start VM → Show tray icon
   │
-  └─ VM running → Settings accessible via SettingsWindow
+  └─ VM running
+        │
+        ├─ Tray → Settings → SettingsWindow (edits saved to config.json, apply on next boot)
+        │
+        └─ Tray → Quit → ACPI shutdown signal → wait for guest → exit
+                              │
+                              └─ 15s timeout → force stop → exit
 ```
 
 Config is persisted to `~/Library/Application Support/SebVM/config.json`:
@@ -93,9 +106,9 @@ Config is persisted to `~/Library/Application Support/SebVM/config.json`:
 - EFI bootable
 - Virtio drivers (included by default in all modern Linux kernels)
 
-**Tested with:** Fedora 43 KDE Desktop (aarch64)
+**Tested with:** Fedora 43 KDE Desktop (aarch64), Fedora 43 XFCE (aarch64)
 
-Other compatible distributions include Ubuntu, Debian, Arch Linux ARM, Alpine, and openSUSE — any aarch64 `.raw` image that boots via EFI will work. Images in other formats (`.qcow2`, `.vmdk`) can be converted using `qemu-img`.
+Other compatible distributions include Ubuntu, Debian, Arch Linux ARM, Alpine, and openSUSE — any aarch64 `.raw` image that boots via EFI will work. Images in other formats (`.qcow2`, `.vmdk`) can be converted using `qemu-img`. ISO images can be attached as secondary storage devices.
 
 ---
 
@@ -115,20 +128,22 @@ Other compatible distributions include Ubuntu, Debian, Arch Linux ARM, Alpine, a
 SebVM/
 ├── SebVM/
 │   ├── swift/
-│   │   ├── config.swift          # VZVirtualMachineConfiguration builder
-│   │   ├── vm.swift              # VM lifecycle management
-│   │   └── AppDelegate.swift     # AppDelegate (retained for Swift runtime)
+│   │   ├── config.swift              # VZVirtualMachineConfiguration builder
+│   │   └── vm.swift                  # VM lifecycle: start, stop, delegate, C exports
 │   ├── cpp/
-│   │   ├── main.cpp              # QApplication entry point + launch flow
-│   │   ├── setupWindow.hpp/cpp   # First-run setup UI
-│   │   ├── settingsWindow.hpp    # Settings window (in progress)
-│   │   ├── vmconfig.hpp/cpp      # Config struct + JSON persistence
-│   │   └── json.hpp              # nlohmann/json (header-only)
+│   │   ├── main.cpp                  # QApplication entry point + launch flow
+│   │   ├── setupWindow.hpp/cpp       # First-run setup UI
+│   │   ├── settingsWindow.hpp/cpp    # Post-launch settings UI
+│   │   ├── vmConfigForm.hpp/cpp      # Shared form widget (used by both windows)
+│   │   ├── vmconfig.hpp/cpp          # Config struct + JSON persistence
+│   │   └── json.hpp                  # nlohmann/json (header-only)
 │   ├── bridge/
-│   │   └── VMBridge.mm           # Objective-C++ interop bridge
+│   │   └── vmbridge_api.h            # C interface to Swift-exported symbols
+│   ├── arc/
+│   │   └── VMBridge.mm               # Archived ObjC++ bridge (superseded by @_cdecl)
 │   └── SebVM.entitlements
 └── resources/
-    └── efi-variable-store        # EFI NVRAM state (auto-created on first boot)
+    └── efi-variable-store            # EFI NVRAM state (auto-created on first boot)
 ```
 
 ---
