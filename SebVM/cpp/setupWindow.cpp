@@ -5,7 +5,7 @@
 //  Created by Sebastian Sidor on 3/7/26.
 //
 
-#include "setupWindow.h"
+#include "setupWindow.hpp"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QHBoxLayout>

@@ -15,22 +15,9 @@
 		026D72422F5CF43D00CE478F /* SebVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SebVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		02BDA8832F5D12820019DCC0 /* Exceptions for "SebVM" folder in "SebVM" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				arc/maindeprecated.swift,
-			);
-			target = 026D72412F5CF43D00CE478F /* SebVM */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		026D72432F5CF43D00CE478F /* SebVM */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				02BDA8832F5D12820019DCC0 /* Exceptions for "SebVM" folder in "SebVM" target */,
-			);
 			path = SebVM;
 			sourceTree = "<group>";
 		};
