@@ -17,9 +17,9 @@ func buildConfig(diskPath: String, cpuCount: Int, memoryGB: Int) throws -> VZVir
     // EFI Bootloader
     let bootloader = VZEFIBootLoader()
     let appSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-    let SebVMDirURL = appSupportURL.appendingPathComponent("SebVM")
-    try FileManager.default.createDirectory(at: SebVMDirURL, withIntermediateDirectories: true)
-    let efiStoreURL = SebVMDirURL.appendingPathComponent("efi-variable-store")
+    let sebVMDirURL = appSupportURL.appendingPathComponent("SebVM")
+    try FileManager.default.createDirectory(at: sebVMDirURL, withIntermediateDirectories: true)
+    let efiStoreURL = sebVMDirURL.appendingPathComponent("efi-variable-store")
     
     if FileManager.default.fileExists(atPath: efiStoreURL.path) {
         bootloader.variableStore = VZEFIVariableStore(url: efiStoreURL)

@@ -1,10 +1,3 @@
-//
-//  settingsWindow.cpp
-//  SebVM
-//
-//  Created by Sebastian Sidor on 3/9/26.
-//
-
 #include "settingsWindow.hpp"
 
 #include <QtWidgets/QVBoxLayout>

@@ -1,10 +1,3 @@
-//
-//  settingsWindow.hpp
-//  SebVM
-//
-//  Created by Sebastian Sidor on 3/9/26.
-//
-
 #pragma once
 
 #include <QtWidgets/QWidget>

@@ -1,10 +1,3 @@
-//
-//  main.cpp
-//  FedoraVM
-//
-//  Created by Sebastian Sidor on 3/7/26.
-//
-
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QSystemTrayIcon>
@@ -76,6 +69,8 @@ int main(int argc, char* argv[]) {
             QMessageBox::warning(nullptr, "Disk image not found", QString("The configured disk image could not be found:\n\n%1\n\nPlease select a new image.").arg(QString::fromStdString(config.diskPath)));
             showSetupWindow();
         }
+    } else {
+        showSetupWindow();
     }
     
     return app.exec();

@@ -1,10 +1,3 @@
-//
-//  vmConfigForm.cpp
-//  SebVM
-//
-//  Created by Sebastian Sidor on 3/9/26.
-//
-
 #include "vmConfigForm.hpp"
 
 #include <QtWidgets/QFormLayout>

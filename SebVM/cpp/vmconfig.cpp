@@ -1,10 +1,3 @@
-//
-//  vmconfig.cpp
-//  SebVM
-//
-//  Created by Sebastian Sidor on 3/9/26.
-//
-
 #include "vmconfig.hpp"
 #include "json.hpp"
 
