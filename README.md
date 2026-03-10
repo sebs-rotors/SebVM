@@ -126,24 +126,24 @@ Other compatible distributions include Ubuntu, Debian, Arch Linux ARM, Alpine, a
 
 ```
 SebVM/
-├── SebVM/
-│   ├── swift/
-│   │   ├── config.swift              # VZVirtualMachineConfiguration builder
-│   │   └── vm.swift                  # VM lifecycle: start, stop, delegate, C exports
-│   ├── cpp/
-│   │   ├── main.cpp                  # QApplication entry point + launch flow
-│   │   ├── setupWindow.hpp/cpp       # First-run setup UI
-│   │   ├── settingsWindow.hpp/cpp    # Post-launch settings UI
-│   │   ├── vmConfigForm.hpp/cpp      # Shared form widget (used by both windows)
-│   │   ├── vmconfig.hpp/cpp          # Config struct + JSON persistence
-│   │   └── json.hpp                  # nlohmann/json (header-only)
-│   ├── bridge/
-│   │   └── vmbridge_api.h            # C interface to Swift-exported symbols
-│   ├── arc/
-│   │   └── VMBridge.mm               # Archived ObjC++ bridge (superseded by @_cdecl)
-│   └── SebVM.entitlements
-└── resources/
-    └── efi-variable-store            # EFI NVRAM state (auto-created on first boot)
+└── SebVM/
+    ├── swift/
+    │   ├── config.swift              # VZVirtualMachineConfiguration builder
+    │   └── vm.swift                  # VM lifecycle: start, stop, delegate, C exports
+    ├── cpp/
+    │   ├── main.cpp                  # QApplication entry point + launch flow
+    │   ├── setupWindow.hpp/cpp       # First-run setup UI
+    │   ├── settingsWindow.hpp/cpp    # Post-launch settings UI
+    │   ├── vmConfigForm.hpp/cpp      # Shared form widget (used by both windows)
+    │   ├── vmconfig.hpp/cpp          # Config struct + JSON persistence
+    │   └── json.hpp                  # nlohmann/json (header-only)
+    ├── bridge/
+    │   └── vmbridge_api.h            # C interface to Swift-exported symbols
+    ├── arc/
+    │   └── VMBridge.mm               # Archived ObjC++ bridge (superseded by @_cdecl)
+    └── SebVM.entitlements
+
+
 ```
 
 ---
