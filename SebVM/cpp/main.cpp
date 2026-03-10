@@ -36,7 +36,10 @@ static void setupTrayIcon() {
     });
     
     QObject::connect(quitAction, &QAction::triggered, []() {
-        QApplication::quit();
+        setVMStoppedCallback([]() {
+            QApplication::quit();
+        });
+        stopVM();
     });
     
     tray->setContextMenu(menu);
