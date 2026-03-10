@@ -142,8 +142,6 @@ SebVM/
     ├── arc/
     │   └── VMBridge.mm               # Archived ObjC++ bridge (superseded by @_cdecl)
     └── SebVM.entitlements
-
-
 ```
 
 ---
