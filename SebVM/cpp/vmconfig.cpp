@@ -23,6 +23,7 @@ VMConfig loadConfig() {
     json j = json::parse(f);
     
     VMConfig config;
+    config.vmType = j.value("vmType", "linux");
     config.diskPath = j["diskPath"].get<std::string>();
     config.cpuCount = j["cpuCount"].get<int>();
     config.memoryGB = j["memoryGB"].get<int>();
@@ -31,6 +32,7 @@ VMConfig loadConfig() {
 
 void saveConfig(const VMConfig& config) {
     json j;
+    j["vmType"] = config.vmType;
     j["diskPath"] = config.diskPath;
     j["cpuCount"] = config.cpuCount;
     j["memoryGB"] = config.memoryGB;

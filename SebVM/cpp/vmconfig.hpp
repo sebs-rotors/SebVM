@@ -2,6 +2,7 @@
 #include <string>
 
 struct VMConfig {
+    std::string vmType = "linux";
     std::string diskPath;
     int cpuCount;
     int memoryGB;
@@ -10,3 +11,4 @@ struct VMConfig {
 bool configExists();
 VMConfig loadConfig();
 void saveConfig(const VMConfig& config);
+
